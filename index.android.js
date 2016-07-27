@@ -9,13 +9,30 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  ListView
 } from 'react-native';
 
+import FoodList from './app/components/containers/FoodList';
+
 class FoodAsFuel extends Component {
+
+  constructor(props){
+    super(props);
+
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      food: ds.cloneWithRows([
+        {name: 'carrots'},
+        {name: 'soylent'}
+      ])
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
+        <FoodList data={this.state.food}/>
       </View>
     );
   }
